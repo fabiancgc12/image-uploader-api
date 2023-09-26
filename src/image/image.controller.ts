@@ -2,19 +2,22 @@ import {
   Controller,
   Post,
   UseInterceptors,
-  UploadedFile, Get, Param, Res
-} from "@nestjs/common";
+  UploadedFile,
+  Get,
+  Param,
+  Res,
+} from '@nestjs/common';
 import { ImageService } from './image.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { Response } from "express";
+import { Response } from 'express';
 
 @Controller('image')
 export class ImageController {
   constructor(private readonly imageService: ImageService) {}
 
   @Get(':path')
-  get(@Param('path') path: string, @Res() res: Response){
+  get(@Param('path') path: string, @Res() res: Response) {
     res.sendFile(path, { root: './uploads' });
   }
 
