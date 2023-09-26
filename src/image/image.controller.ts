@@ -28,7 +28,7 @@ export class ImageController {
         destination: './uploads',
         filename: function (req, file, callback) {
           const [name, ext] = file.originalname.split('.');
-          const newName = name.split(' ').join('') + '.' + ext;
+          const newName = name.split(' ').join('') + Date.now().toString() +'.' + ext;
           callback(null, newName);
         },
       }),
@@ -36,7 +36,7 @@ export class ImageController {
   )
   create(@UploadedFile() file: Express.Multer.File) {
     return {
-      path: file.path,
+      path: file.filename,
       mimetype: file.mimetype,
     };
   }
